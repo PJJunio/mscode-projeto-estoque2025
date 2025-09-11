@@ -105,4 +105,24 @@ class Query
             return false;
         }
     }
+
+    public function getPassword($email, $password)
+    {
+        try {
+            $sql = 'SELECT senha FROM usuario WHERE email = :email';
+            $stmt = $this->pdo->prepare($sql);
+            $stmt->execute(['email' => $email]);
+            $userPassword = $stmt->fetchColumn();
+
+            if ($userPassword === $password) {
+                return true;
+            } else {
+                return false;
+            }
+        } catch (\PDOException $e) {
+            echo "Erro na busca: {$e->getMessage()}";
+
+            return false;
+        }
+    }
 }

@@ -43,3 +43,6 @@ CREATE TABLE venda_item (
   FOREIGN KEY (venda_id) REFERENCES venda(id),
   FOREIGN KEY (produto_id) REFERENCES produto(id)
 );
+
+-- Inserir usuario teste
+INSERT INTO usuario (nome, email, senha) VALUES ('Usuario Teste', 'teste@teste.com', '12345678');
