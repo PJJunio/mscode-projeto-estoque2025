@@ -14,7 +14,7 @@ $produtos = $query->select('produto');
             <div class="mb-4 d-flex flex-row justify-content-between">
                 <h1>Produtos</h1>
                 <div>
-                    <a href="new_product" class="btn btn-primary"><i class="bi bi-plus"></i>Novo produto</a>
+                    <a href="product" class="btn btn-primary"><i class="bi bi-plus"></i>Novo produto</a>
                 </div>
             </div>
 
@@ -43,13 +43,13 @@ $produtos = $query->select('produto');
                                 <td><?= 'R$ ' . number_format($produto['valor'], 2, ',', '.') ?></td>
                                 <td><?= $produto['quantidade_disponivel'] ?></td>
                                 <td class="col-2 d-flex gap-1 w-auto flex-wrap">
-                                    <button class="btn btn-primary btn-sm" title="Adicionar 1 (incrementar quantidade)"><i
-                                            class="bi bi-plus"></i></button>
-                                    <button class="btn btn-secondary btn-sm" title="Editar produto"><i
-                                            class="bi bi-pencil"></i></button>
-                                    <button class="btn btn-danger btn-sm" title="Excluir"><i class="bi bi-trash"></i></button>
-                                    <button class="btn btn-primary btn-sm"
-                                        title="Vender produto (decrementar 1)">Vender</button>
+                                    <a href='product?add=<?= $produto['id']?>' class="btn btn-primary btn-sm" title="Adicionar 1 (incrementar quantidade)"><i
+                                            class="bi bi-plus"></i></a>
+                                    <a class="btn btn-secondary btn-sm" title="Editar produto"><i
+                                            class="bi bi-pencil"></i></a>
+                                    <a href='product?delete=<?= $produto['id'] ?>' class="btn btn-danger btn-sm" title="Excluir"><i class="bi bi-trash"></i></a>
+                                    <a href='product?sell=<?= $produto['id']?>' class="btn btn-primary btn-sm"
+                                        title="Vender produto (decrementar 1)">Vender</a>
                                 </td>
                             </tr>
                             <?php

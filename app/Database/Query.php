@@ -12,7 +12,7 @@ class Query
             host: '127.0.0.1',
             database: 'mscode_estoque2025',
             username: 'root',
-            password: 'root',
+            password: 'password',
             port: 3306,
         );
 
@@ -63,7 +63,7 @@ class Query
         }
     }
 
-    public function update(string $tabela, array $dados, string $condicao): bool
+    public function update(string $tabela, array $dados, string $condicao, array $parametros = []): bool
     {
         try {
             $sets = [];
@@ -80,7 +80,9 @@ class Query
                 $stmt->bindValue(":{$coluna}", $valor);
             }
 
-            $stmt->execute();
+            echo $sql;
+
+            $stmt->execute($parametros);
 
             return true;
         } catch (\PDOException $e) {
@@ -90,13 +92,53 @@ class Query
         }
     }
 
-    public function delete(string $tabela, string $condicao): bool
+    public function insertOne(string $tabela, string $coluna, string $condicao, array $parametros = []): bool
+    {
+        try {
+            $sql = "UPDATE {$tabela} SET {$coluna} = {$coluna} + 1";
+
+            if($condicao !== null) {
+                $sql .= " WHERE {$condicao}";
+            }
+
+            $stmt = $this->pdo->prepare($sql);
+            $stmt->execute($parametros);
+
+            return true;
+        } catch (\PDOException $e) {
+            echo "Erro na atualização: {$e->getMessage()}";
+
+            return false;
+        }
+    }
+
+    public function decrementOne(string $tabela, string $coluna, string $condicao, array $parametros = []): bool
+    {
+        try {
+            $sql = "UPDATE {$tabela} SET {$coluna} = {$coluna} - 1";
+
+            if($condicao !== null) {
+                $sql .= " WHERE {$condicao}";
+            }
+
+            $stmt = $this->pdo->prepare($sql);
+            $stmt->execute($parametros);
+
+            return true;
+        } catch (\PDOException $e) {
+            echo "Erro na atualização: {$e->getMessage()}";
+
+            return false;
+        }
+    }
+
+    public function delete(string $tabela, string $condicao, array $parametros = []): bool
     {
         try {
             $sql = "DELETE FROM {$tabela} WHERE {$condicao}";
 
             $stmt = $this->pdo->prepare($sql);
-            $stmt->execute();
+            $stmt->execute($parametros);
 
             return true;
         } catch (\PDOException $e) {

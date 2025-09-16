@@ -15,7 +15,7 @@ $router = [
         '/login' => LoginController::class,
         '/logoff' => LogoffController::class,
         '/error' => ErrorController::class,
-        '/new_product' => ProductController::class,
+        '/product' => ProductController::class,
         '/category' => CategoryController::class,
         '/new_category' => NewCategoryController::class,
     ],
