@@ -12,7 +12,7 @@ class Query
             host: '127.0.0.1',
             database: 'mscode_estoque2025',
             username: 'root',
-            password: 'password',
+            password: 'root',
             port: 3306,
         );
 
@@ -125,4 +125,25 @@ class Query
             return false;
         }
     }
+
+    public function count(string $tabela, ?string $condicao = null, array $parametros = [], string $colunas = '*'): false|array
+    {
+        try {
+            $sql = "SELECT COUNT({$colunas}) FROM {$tabela}";
+
+            if($condicao !== null) {
+                $sql .= " WHERE {$condicao}";
+            }
+
+            $stmt = $this->pdo->prepare($sql);
+            $stmt->execute($parametros);
+
+            return $stmt->fetchAll(\PDO::FETCH_ASSOC);
+        } catch (\PDOException $e) {
+            echo "Erro na consulta: {$e->getMessage()}";
+
+            return false;
+        }
+    }
+
 }
