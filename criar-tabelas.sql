@@ -46,3 +46,24 @@ CREATE TABLE venda_item (
 
 -- Inserir usuario teste
 INSERT INTO usuario (nome, email, senha) VALUES ('Usuario Teste', 'teste@teste.com', '12345678');
+
+-- EXEMPLOS
+
+-- Inserir categorias de teste
+INSERT INTO categoria (nome) VALUES ('Eletrônicos');
+INSERT INTO categoria (nome) VALUES ('Livros');
+INSERT INTO categoria (nome) VALUES ('Vestuário');
+INSERT INTO categoria (nome) VALUES ('Alimentos');
+
+-- Inserir produtos de teste (certifique-se de que as IDs das categorias existem)
+-- Supondo que 'Eletrônicos' tem id = 1, 'Livros' tem id = 2, 'Vestuário' tem id = 3
+INSERT INTO produto (nome, descricao, categoria_id, quantidade_inicial, quantidade_disponivel, valor) VALUES 
+('Smartphone Galaxy', 'Um smartphone de última geração.', 1, 50, 50, 2500),
+('Notebook Gamer', 'Notebook potente para jogos e trabalho.', 1, 20, 20, 7000),
+('O Senhor dos Anéis', 'Um clássico da literatura de fantasia.', 2, 100, 100, 50),
+('Camiseta Estampada', 'Camiseta de algodão com estampa exclusiva.', 3, 200, 200, 35);
+
+-- Inserir usuario
+INSERT INTO usuario (nome, email, senha) VALUES 
+('João Silva', 'joao.silva@teste.com', 'senha123'),
+('Maria Oliveira', 'maria.oliveira@teste.com', 'senha456');
