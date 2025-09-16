@@ -1,5 +1,11 @@
 <?php
 require_once __DIR__ . '/includes/header.php';
+require_once __DIR__ . '/../../app/Database/Query.php';
+
+$query = new \App\Database\Query;
+
+$produtos = $query->select('produto');
+
 ?>
 
 <main>
@@ -25,25 +31,38 @@ require_once __DIR__ . '/includes/header.php';
                     </tr>
                 </thead>
                 <tbody>
-                    <tr>
-                        <th scope="row">1</th>
-                        <td>nome</td>
-                        <td>descrição</td>
-                        <td>categoria id</td>
-                        <td>R$ 398,00</td>
-                        <td>2</td>
-                        <td class="col-2 d-flex gap-1 w-auto flex-wrap">
-                            <button class="btn btn-primary btn-sm" title="Adicionar 1 (incrementar quantidade)"><i
-                                    class="bi bi-plus"></i></button>
-                            <button class="btn btn-secondary btn-sm" title="Editar produto"><i
-                                    class="bi bi-pencil"></i></button>
-                            <button class="btn btn-danger btn-sm" title="Excluir"><i class="bi bi-trash"></i></button>
-                            <button class="btn btn-primary btn-sm"
-                                title="Vender produto (decrementar 1)">Vender</button>
-                        </td>
-                    </tr>
+                    <?php
+                    if (is_array($produtos) && count($produtos) > 0) {
+                        foreach ($produtos as $produto) {
+                            ?>
+                            <tr>
+                                <th scope="row"><?= $produto['id'] ?></th>
+                                <td><?= $produto['nome'] ?></td>
+                                <td><?= $produto['descricao'] ?></td>
+                                <td><?= $produto['categoria_id'] ?></td>
+                                <td><?= 'R$ ' . number_format($produto['valor'], 2, ',', '.') ?></td>
+                                <td><?= $produto['quantidade_disponivel'] ?></td>
+                                <td class="col-2 d-flex gap-1 w-auto flex-wrap">
+                                    <button class="btn btn-primary btn-sm" title="Adicionar 1 (incrementar quantidade)"><i
+                                            class="bi bi-plus"></i></button>
+                                    <button class="btn btn-secondary btn-sm" title="Editar produto"><i
+                                            class="bi bi-pencil"></i></button>
+                                    <button class="btn btn-danger btn-sm" title="Excluir"><i class="bi bi-trash"></i></button>
+                                    <button class="btn btn-primary btn-sm"
+                                        title="Vender produto (decrementar 1)">Vender</button>
+                                </td>
+                            </tr>
+                            <?php
+                        }
+                    } else {
+                        ?>
+                        <tr>
+                            <td colspan="7" class="text-center">Nenhum produto encontrado.</td>
+                        </tr>
+                        <?php
+                    }
+                    ?>
                 </tbody>
-
             </table>
         </div>
     </div>
