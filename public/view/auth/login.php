@@ -16,6 +16,9 @@
 <body class="d-flex align-items-center py-4 bg-body-tertiary">
   <main class="form-signin m-auto">
     <form action="/login" method="POST">
+      <?php if (!empty($data['error'])) {
+        echo $data['error'];
+      } ?>
       <div class="d-flex align-items-center mb-4">
         <img class="p-0" src="assets/images/logotipo.svg" width="72" height="57">
 
