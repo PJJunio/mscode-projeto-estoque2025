@@ -15,13 +15,21 @@ class User
 
     public function getEmail($email)
     {
-        $sql = $this->conn->select("usuario", "email = '$email'");
-        var_dump($sql);
+        $result = $this->conn->count("usuario", "email = ?", [$email]);
 
-        if (!empty($sql)) {
-            return true;
+        if ($result === false || empty($result)) {
+            echo "Erro ao buscar usuário ou resultado vazio";
+            exit;
+
+        }
+
+        $count = (int) $result[0]['COUNT(*)'];
+
+        if ($count > 0) {
+            echo "Usuario encontrado";
+
         } else {
-            return false;
+            echo "Usuario não encontrado";
         }
     }
 }
