@@ -2,6 +2,7 @@
 
 use App\Controller\AppController;
 use App\Controller\Auth\LoginController;
+use App\Controller\Auth\LogoffController;
 use App\Controller\Category\NewCategoryController;
 use App\Controller\Category\CategoryController;
 use App\Controller\Error\ErrorController;
@@ -12,6 +13,7 @@ $router = [
     'routes' => [
         '/' => AppController::class,
         '/login' => LoginController::class,
+        '/logoff' => LogoffController::class,
         '/error' => ErrorController::class,
         '/new_product' => ProductController::class,
         '/category' => CategoryController::class,
