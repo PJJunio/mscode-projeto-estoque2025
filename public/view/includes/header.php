@@ -56,7 +56,7 @@ if (empty($_SESSION)) {
                             <li><a class="dropdown-item" href="category">Categorias</a></li>
                         </ul>
                     </li>
-                    <li class="nav-item"><a href="login" class="btn btn-outline-danger m-0 ms-4"
+                    <li class="nav-item"><a href="/logoff" class="btn btn-outline-danger m-0 ms-4"
                             aria-current="page">Sair</a></li>
                 </ul>
             </header>
