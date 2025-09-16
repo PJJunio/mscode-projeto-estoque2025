@@ -3,23 +3,29 @@
 namespace App\Controller\Auth;
 
 use App\Controller\AbstractController;
-use App\Database\Query;
-use App\Database\Database;
 use App\Model\User;
 use Throwable;
 
 class LoginController extends AbstractController
 {
-
     public function index(array $requestData): void
     {
+        $error = null;
 
-        var_dump($requestData['email']);
+        if (!empty($requestData['email']) && !empty($requestData['password'])) {
+            $model = new User();
+            $user = $model->getUserByEmail($requestData['email']);
 
-        $model = new User();
+            if ($user && $requestData['password'] === $user['senha']) {
+                session_start();
+                $_SESSION['user'] = $user['nome'];
+                $this->redirect('/');
+                return;
+            } else {
+                $error = '<div class="alert alert-danger" role="alert">Email ou senha incorretos</div>';
+            }
+        }
 
-        $email = $model->getEmail($requestData['email']);
-
-        $this->render('auth/login.php');
+        $this->render('auth/login.php', ['error' => $error]);
     }
 }
