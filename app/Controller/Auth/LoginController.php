@@ -13,11 +13,12 @@ class LoginController extends AbstractController
 
     public function index(array $requestData): void
     {
+
+        var_dump($requestData['email']);
+
         $model = new User();
 
         $email = $model->getEmail($requestData['email']);
-
-        var_dump($email);
 
         $this->render('auth/login.php');
     }
