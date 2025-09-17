@@ -34,7 +34,13 @@ class ProductController extends AbstractController
 
         if (!empty($_GET['sell'])) {
             $model->decrementOne($_GET['sell']);
-            // header('Location: /');
+            header('Location: /');
+            exit;
+        }
+
+        if (!empty($requestData['nome']) && !empty($requestData['descricao']) && !empty($requestData['categoriaId']) && !empty($requestData['quantidade']) && !empty($requestData['valor'])) {
+            $model->newProduct($requestData['nome'], $requestData['descricao'], $requestData['categoriaId'], $requestData['quantidade'], $requestData['valor']);
+            header('Location: /');
             exit;
         }
 
