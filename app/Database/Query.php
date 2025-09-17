@@ -12,7 +12,7 @@ class Query
             host: '127.0.0.1',
             database: 'mscode_estoque2025',
             username: 'root',
-            password: 'password',
+            password: 'root',
             port: 3306,
         );
 
@@ -47,6 +47,8 @@ class Query
 
             $sql = "INSERT INTO {$tabela} ({$colunas}) VALUES ({$valores})";
 
+            echo $sql . PHP_EOL;
+
             $stmt = $this->pdo->prepare($sql);
 
             foreach ($dados as $coluna => $valor) {
@@ -80,9 +82,9 @@ class Query
                 $stmt->bindValue(":{$coluna}", $valor);
             }
 
-            echo $sql;
+            $parametros_completos = array_merge($dados, $parametros);
 
-            $stmt->execute($parametros);
+            $stmt->execute($parametros_completos);
 
             return true;
         } catch (\PDOException $e) {
