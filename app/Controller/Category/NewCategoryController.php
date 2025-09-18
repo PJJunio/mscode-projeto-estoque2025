@@ -13,14 +13,12 @@ class NewCategoryController extends AbstractController
 
         $error = null;
 
+        //PAROU AQUI, TEM QUE CRIAR A VALIDAÇÂO PARA VER SE JÁ TEM ALGUMA CATEGORIA COM ESSE NOME
         if (!empty($_POST)) {
-            $name = $_POST['nome'];
+            if ($model->createCategory($_POST['nome'])) {
+            }
 
-            if ($this->model)
-
-            $error = $name
         }
-
         $this->render('category/newCategory.php', ['error' => $error]);
     }
 }
