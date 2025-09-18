@@ -4,7 +4,6 @@ namespace App\Controller\Auth;
 
 use App\Controller\AbstractController;
 use App\Model\User;
-use Throwable;
 
 class LoginController extends AbstractController
 {

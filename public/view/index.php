@@ -45,7 +45,7 @@ $produtos = $query->select('produto');
                                 <td class="col-2 d-flex gap-1 w-auto flex-wrap">
                                     <a href='product?add=<?= $produto['id'] ?>' class="btn btn-primary btn-sm"
                                         title="Adicionar 1 (incrementar quantidade)"><i class="bi bi-plus"></i></a>
-                                    <a href="product/edit/?id=<?= $produto['id'] ?>&name=<?= $produto['nome'] ?>"
+                                    <a href="product/edit/?id=<?= $produto['id'] ?>"
                                         class="btn btn-secondary btn-sm" title="Editar produto"><i class="bi bi-pencil"></i></a>
                                     <a href='product?delete=<?= $produto['id'] ?>' class="btn btn-danger btn-sm"
                                         title="Excluir"><i class="bi bi-trash"></i></a>

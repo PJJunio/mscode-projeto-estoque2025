@@ -12,7 +12,7 @@ class Query
             host: '127.0.0.1',
             database: 'mscode_estoque2025',
             username: 'root',
-            password: 'root',
+            password: 'password',
             port: 3306,
         );
 
