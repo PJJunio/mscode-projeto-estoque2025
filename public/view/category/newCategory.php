@@ -9,16 +9,15 @@ require_once __DIR__ . '/../includes/header.php';
         </div>
 
         <div class="w-50 mt-2">
-            <form>
-                <div class="mb-3">
-                    <label for="id" class="form-label">Id: </label>
-                    <input type="email" class="form-control" id="id" disabled value="0">
-                </div>
+            <form method="POST" action="/category/new">
+                <?php if (!empty($data['error'])) {
+                    echo $data['error'];
+                } ?>
                 <div class="mb-3">
                     <label for="nome" class="form-label">Nome</label>
-                    <input type="text" class="form-control" id="nome">
+                    <input type="text" class="form-control" id="nome" name="nome">
                 </div>
-                <button type="submit" class="btn btn-primary">Salvar</button>
+                <button type="submit" class="btn btn-primary">Criar</button>
             </form>
         </div>
     </div>

@@ -14,9 +14,21 @@ class Category
         $this->query = new Query();
     }
 
-    public function deleteCategory($categoryId)
+    public function deleteCategory($categoryId): bool
     {
-        return $this->query->delete('categoria ', 'id = :id', [':id' => $categoryId]);
+        if ($this->query->delete('categoria ', 'id = :id', [':id' => $categoryId])) {
+            return true;
+            
+        } else {
+            return false;
+            
+        }
+    }
+
+    public function createCategory($nome)
+    {
+        $this->query->insert('categoria', ['nome' => $nome]);
+        return true;
     }
 
 }

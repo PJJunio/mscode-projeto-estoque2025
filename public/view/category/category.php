@@ -11,7 +11,7 @@ $categorias = $query->select('categoria');
     <div class="mb-4 d-flex flex-row justify-content-between">
       <h1>Categorias</h1>
       <div>
-        <a href="new_category" class="btn btn-primary"><i class="bi bi-plus"></i>Nova categoria</a>
+        <a href="category/new" class="btn btn-primary"><i class="bi bi-plus"></i>Nova categoria</a>
       </div>
     </div>
 

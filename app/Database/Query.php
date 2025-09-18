@@ -144,7 +144,7 @@ class Query
 
             return true;
         } catch (\PDOException $e) {
-            echo "Erro na exclusão: {$e->getMessage()}";
+            // echo "Erro na exclusão: {$e->getMessage()}";
 
             return false;
         }

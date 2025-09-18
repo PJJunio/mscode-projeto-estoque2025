@@ -20,7 +20,7 @@ $router = [
         '/product/new' => ProductController::class,
         '/product/edit' => EditProductController::class,
         '/category' => CategoryController::class,
-        '/new_category' => NewCategoryController::class,
+        '/category/new' => NewCategoryController::class,
     ],
     'default' => NotFoundController::class
 ];
