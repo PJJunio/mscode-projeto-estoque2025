@@ -20,8 +20,8 @@ class User
         return $result[0] ?? null;
     }
 
-    // public function checkPassword(string $password, string $hashedPassword): bool
-    // {
-    //     return password_verify($password, $hashedPassword);
-    // }
+    public function checkPassword(string $password, string $hashedPassword): bool
+    {
+        return password_verify($password, $hashedPassword);
+    }
 }

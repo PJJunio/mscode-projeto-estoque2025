@@ -11,20 +11,26 @@ class LoginController extends AbstractController
     {
         $error = null;
 
-        if (!empty($requestData['email']) && !empty($requestData['password'])) {
-            $model = new User();
-            $user = $model->getUserByEmail($requestData['email']);
+        if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+            $email = $requestData['email'] ?? '';
+            $password = $requestData['password'] ?? '';
 
-            if ($user && $requestData['password'] === $user['senha']) {
-                session_start();
-                $_SESSION['user'] = $user['nome'];
-                $this->redirect('/');
-                return;
+            if (empty($email) || empty($password)) {
+                $error = '<div class="alert alert-danger" role="alert">Preencha todos os campos!</div>';
             } else {
-                $error = '<div class="alert alert-danger" role="alert">Email ou senha incorretos</div>';
+                $model = new User();
+                $user = $model->getUserByEmail($email);
+
+                if ($user && $model->checkPassword($password, $user['senha'])) {
+                    session_start();
+                    $_SESSION['user'] = $user['nome'];
+                    $this->redirect('/');
+                    return;
+                } else {
+                    $error = '<div class="alert alert-danger" role="alert">Email ou senha incorretos</div>';
+                }
             }
         }
-
         $this->render('auth/login.php', ['error' => $error]);
     }
 }
