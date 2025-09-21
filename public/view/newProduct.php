@@ -1,5 +1,9 @@
 <?php
 require_once __DIR__ . '/includes/header.php';
+require_once __DIR__ . '/../../app/Database/Query.php';
+
+$query = new \App\Database\Query;
+$data['categories'] = $query->select('categoria');
 ?>
 
 <main>
@@ -25,8 +29,18 @@ require_once __DIR__ . '/includes/header.php';
 
         <div class="row">
           <div class="mb-3 col-4">
-            <label for="categoriaId" class="form-label">Categoria Id:</label>
-            <input type="number" class="form-control" id="categoriaId" name="categoriaId" value="<?php echo htmlspecialchars($data['formData']['categoriaId'] ?? ''); ?>">
+            <label for="categoriaId" class="form-label">Categoria:</label>
+            <select class="form-select" id="categoriaId" name="categoriaId">
+              <option selected disabled>Selecione...</option>
+              <?php
+              if (!empty($data['categories'])) {
+                foreach ($data['categories'] as $category) {
+                  $isSelected = (isset($data['formData']['categoriaId']) && $data['formData']['categoriaId'] == $category['id']) ? 'selected' : '';
+                  echo "<option value=\"{$category['id']}\" {$isSelected}>" . htmlspecialchars($category['nome']) . "</option>";
+                }
+              }
+              ?>
+            </select>
           </div>
           <div class="mb-3 col-4">
             <label for="quantidade" class="form-label">Quantidade:</label>
