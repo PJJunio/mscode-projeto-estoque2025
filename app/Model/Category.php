@@ -18,16 +18,23 @@ class Category
     {
         if ($this->query->delete('categoria ', 'id = :id', [':id' => $categoryId])) {
             return true;
-            
+
         } else {
             return false;
-            
+
         }
     }
 
     public function createCategory($nome)
     {
-        $this->query->insert('categoria', ['nome' => $nome]);
+        $search = $this->query->select('categoria', 'nome = :nome', [':nome' => $nome], 'nome');
+
+        if (!empty($search)) {
+            return false;
+        }
+
+        $dados = ['nome' => $nome];
+        $this->query->insert('categoria', $dados);
         return true;
     }
 
