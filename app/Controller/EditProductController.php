@@ -16,10 +16,26 @@ class EditProductController extends AbstractController
 
     public function index(array $requestData): void
     {
+        $productId = $_POST['id'] ?? $requestData['id'] ?? null;
+
+        if (!$productId) {
+            $this->redirectToError('ID do produto não especificado.');
+            return;
+        }
+
         $model = new Product();
+        $error = null;
+
+        $productDataArray = $this->query->select('produto', 'id = :id', [':id' => $productId]);
+
+        if (!$productDataArray) {
+            $this->redirectToError('Produto não encontrado.');
+            return;
+        }
+        $productData = $productDataArray[0];
 
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-            if (isset($_POST['id'])) {
+            if (!empty($_POST['nome']) && !empty($_POST['descricao']) && !empty($_POST['categoriaId']) && !empty($_POST['quantidade']) && !empty($_POST['valor'])) {
                 $model->editProduct(
                     $_POST['id'],
                     $_POST['nome'],
@@ -30,22 +46,22 @@ class EditProductController extends AbstractController
                 );
 
                 $this->redirect('/');
+                return;
             } else {
-                $this->redirectToError('ID do produto não especificado para edição.');
+                $error = '<div class="alert alert-danger" role="alert">Preencha todos os campos!</div>';
+
+                $productData['nome'] = $_POST['nome'];
+                $productData['descricao'] = $_POST['descricao'];
+                $productData['categoria_id'] = $_POST['categoriaId'];
+                $productData['quantidade_disponivel'] = $_POST['quantidade'];
+                $productData['valor'] = $_POST['valor'];
+
             }
         }
 
-        if (isset($requestData['id'])) {
-            $productId = $requestData['id'];
-            $productData = $this->query->select('produto', 'id = :id', [':id' => $productId]);
-
-            if ($productData) {
-                $this->render('editProduct.php', ['product' => $productData[0]]);
-            } else {
-                $this->redirectToError('Produto não encontrado.');
-            }
-        } else {
-            $this->redirectToError('ID do produto não especificado para edição.');
-        }
+        $this->render('editProduct.php', [
+            'product' => $productData,
+            'error' => $error
+        ]);
     }
 }

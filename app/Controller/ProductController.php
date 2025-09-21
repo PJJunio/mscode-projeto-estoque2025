@@ -38,12 +38,21 @@ class ProductController extends AbstractController
             exit;
         }
 
-        if (!empty($requestData['nome']) && !empty($requestData['descricao']) && !empty($requestData['categoriaId']) && !empty($requestData['quantidade']) && !empty($requestData['valor'])) {
-            $model->newProduct($requestData['nome'], $requestData['descricao'], $requestData['categoriaId'], $requestData['quantidade'], $requestData['valor']);
-            header('Location: /');
-            exit;
+        if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+            $formData = $_POST;
+
+            if (!empty($formData['nome']) && !empty($formData['descricao']) && !empty($formData['categoriaId']) && !empty($formData['quantidade']) && !empty($formData['valor'])) {
+                $model->newProduct($formData['nome'], $formData['descricao'], $formData['categoriaId'], $formData['quantidade'], $formData['valor']);
+                header('Location: /');
+                exit;
+            } else {
+                $error = '<div class="alert alert-danger" role="alert">Preencha todos os campos!</div>';
+            }
         }
 
-        $this->render('newProduct.php', []);
+        $this->render('newProduct.php', [
+            'error' => $error,
+            'formData' => $formData
+        ]);
     }
 }
