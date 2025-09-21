@@ -1,3 +1,7 @@
+CREATE DATABASE mscode_estoque2025;
+
+USE mscode_estoque2025;
+
 -- Create categoria table
 CREATE TABLE categoria (
   id INT PRIMARY KEY AUTO_INCREMENT,
@@ -45,7 +49,7 @@ CREATE TABLE venda_item (
 );
 
 -- Inserir usuario teste
-INSERT INTO usuario (nome, email, senha) VALUES ('Usuario Teste', 'teste@teste.com', '12345678');
+INSERT INTO usuario (nome, email, senha) VALUES ('Usuario Teste', 'teste@teste.com', '$2y$10$imJI/zs.MLYTPl.AM.qxQ.XHILnO.zf61CRm0QppShzamLY7ksxee');
 
 -- EXEMPLOS
 
@@ -65,5 +69,35 @@ INSERT INTO produto (nome, descricao, categoria_id, quantidade_inicial, quantida
 
 -- Inserir usuario
 INSERT INTO usuario (nome, email, senha) VALUES 
-('João Silva', 'joao.silva@teste.com', 'senha123'),
-('Maria Oliveira', 'maria.oliveira@teste.com', 'senha456');
+('João Silva', 'joao.silva@teste.com', '$2y$10$imJI/zs.MLYTPl.AM.qxQ.XHILnO.zf61CRm0QppShzamLY7ksxee'),
+('Maria Oliveira', 'maria.oliveira@teste.com', '$2y$10$imJI/zs.MLYTPl.AM.qxQ.XHILnO.zf61CRm0QppShzamLY7ksxee');
+
+-- Insert venda
+INSERT INTO venda (cpf_cliente, status) VALUES 
+('12345678901', 'finalizada'),
+('98765432109', 'finalizada'),
+('11223344556', 'pendente'),
+('66554433221', 'cancelada');
+
+-- Insert venda_item
+INSERT INTO venda_item (venda_id, produto_id, quantidade, preco_unitario) VALUES 
+(1, 1, 1, 2500.00),
+(1, 3, 2, 50.00);
+INSERT INTO venda_item (venda_id, produto_id, quantidade, preco_unitario) VALUES 
+(2, 4, 3, 35.00);
+INSERT INTO venda_item (venda_id, produto_id, quantidade, preco_unitario) VALUES 
+(3, 2, 1, 7000.00);
+INSERT INTO venda_item (venda_id, produto_id, quantidade, preco_unitario) VALUES 
+(4, 3, 1, 50.00);
+
+-- Utils
+SELECT * FROM usuario;
+SELECT * FROM categoria;
+SELECT * FROM produto;
+SELECT * FROM venda;
+SELECT * FROM venda_item;
+
+DELETE FROM categoria WHERE id = 1;
+DELETE FROM usuario;
+
+UPDATE produto SET categoria_id = NULL WHERE categoria_id = 3;
