@@ -13,7 +13,6 @@ class NewCategoryController extends AbstractController
 
         $error = null;
 
-        //PAROU AQUI, TEM QUE CRIAR A VALIDAÇÂO PARA VER SE JÁ TEM ALGUMA CATEGORIA COM ESSE NOME
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             if (empty($_POST['nome'])) {
                 $error = '<div class="alert alert-danger" role="alert">Pencha o campo!</div>';
