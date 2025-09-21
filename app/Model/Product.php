@@ -41,6 +41,19 @@ class Product
 
     public function newProduct($nome, $descricao, $categoriaId, $quantidade, $valor)
     {
+        $existingProduct = $this->conn->select(
+            'produto',
+            'nome = :nome AND categoria_id = :categoriaId',
+            [
+                ':nome' => $nome,
+                ':categoriaId' => $categoriaId
+            ]
+        );
+
+        if (!empty($existingProduct)) {
+            return false;
+        }
+
         $this->conn->insert('produto', [
             'nome' => $nome,
             'descricao' => $descricao,

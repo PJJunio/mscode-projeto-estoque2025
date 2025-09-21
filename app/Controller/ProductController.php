@@ -38,15 +38,29 @@ class ProductController extends AbstractController
             exit;
         }
 
+        $error = null;
+        $formData = [];
+
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $formData = $_POST;
 
-            if (!empty($formData['nome']) && !empty($formData['descricao']) && !empty($formData['categoriaId']) && !empty($formData['quantidade']) && !empty($formData['valor'])) {
-                $model->newProduct($formData['nome'], $formData['descricao'], $formData['categoriaId'], $formData['quantidade'], $formData['valor']);
-                header('Location: /');
-                exit;
-            } else {
+            if (empty($formData['nome']) || empty($formData['descricao']) || empty($formData['categoriaId']) || empty($formData['quantidade']) || empty($formData['valor'])) {
                 $error = '<div class="alert alert-danger" role="alert">Preencha todos os campos!</div>';
+            } else {
+                $success = $model->newProduct(
+                    $formData['nome'],
+                    $formData['descricao'],
+                    $formData['categoriaId'],
+                    $formData['quantidade'],
+                    $formData['valor']
+                );
+
+                if ($success) {
+                    header('Location: /');
+                    exit;
+                } else {
+                    $error = '<div class="alert alert-danger" role="alert">Já existe um produto com este nome nesta categoria.</div>';
+                }
             }
         }
 
