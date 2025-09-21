@@ -24,7 +24,7 @@ $produtos = $query->select('produto');
                         <th scope="col">Id</th>
                         <th scope="col">Nome</th>
                         <th scope="col">Descrição</th>
-                        <th scope="col">Categoria Id</th>
+                        <th scope="col">Categoria</th>
                         <th scope="col">Valor</th>
                         <th scope="col">Qtd. Disponível</th>
                         <th scope="col-2 text-align-right">Ações</th>
@@ -34,12 +34,13 @@ $produtos = $query->select('produto');
                     <?php
                     if (is_array($produtos) && count($produtos) > 0) {
                         foreach ($produtos as $produto) {
+                            $categoria = $query->select('categoria', 'id = :id', [':id' => $produto['categoria_id']], 'nome');
                             ?>
                             <tr>
                                 <th scope="row"><?= $produto['id'] ?></th>
                                 <td><?= $produto['nome'] ?></td>
                                 <td><?= $produto['descricao'] ?></td>
-                                <td><?= $produto['categoria_id'] ?></td>
+                                <td><?= $categoria[0]['nome'] ?></td>
                                 <td><?= 'R$ ' . number_format($produto['valor'], 2, ',', '.') ?></td>
                                 <td><?= $produto['quantidade_disponivel'] ?></td>
                                 <td class="col-2 d-flex gap-1 w-auto flex-wrap">
