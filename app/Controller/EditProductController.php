@@ -35,8 +35,10 @@ class EditProductController extends AbstractController
         $productData = $productDataArray[0];
 
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-            if (!empty($_POST['nome']) && !empty($_POST['descricao']) && !empty($_POST['categoriaId']) && !empty($_POST['quantidade']) && !empty($_POST['valor'])) {
-                $model->editProduct(
+            if (empty($_POST['nome']) || empty($_POST['descricao']) || empty($_POST['categoriaId']) || empty($_POST['quantidade']) || empty($_POST['valor'])) {
+                $error = '<div class="alert alert-danger" role="alert">Preencha todos os campos!</div>';
+            } else {
+                $success = $model->editProduct(
                     $_POST['id'],
                     $_POST['nome'],
                     $_POST['descricao'],
@@ -45,18 +47,19 @@ class EditProductController extends AbstractController
                     $_POST['valor']
                 );
 
-                $this->redirect('/');
-                return;
-            } else {
-                $error = '<div class="alert alert-danger" role="alert">Preencha todos os campos!</div>';
-
-                $productData['nome'] = $_POST['nome'];
-                $productData['descricao'] = $_POST['descricao'];
-                $productData['categoria_id'] = $_POST['categoriaId'];
-                $productData['quantidade_disponivel'] = $_POST['quantidade'];
-                $productData['valor'] = $_POST['valor'];
-
+                if ($success) {
+                    $this->redirect('/');
+                    return;
+                } else {
+                    $error = '<div class="alert alert-danger" role="alert">Já existe um produto com este nome nesta categoria.</div>';
+                }
             }
+
+            $productData['nome'] = $_POST['nome'];
+            $productData['descricao'] = $_POST['descricao'];
+            $productData['categoria_id'] = $_POST['categoriaId'];
+            $productData['quantidade_disponivel'] = $_POST['quantidade'];
+            $productData['valor'] = $_POST['valor'];
         }
 
         $this->render('editProduct.php', [

@@ -67,6 +67,20 @@ class Product
 
     public function editProduct($id, $nome, $descricao, $categoriaId, $quantidade, $valor)
     {
+        $existingProduct = $this->conn->select(
+            'produto',
+            'nome = :nome AND categoria_id = :categoriaId AND id != :id',
+            [
+                ':nome' => $nome,
+                ':categoriaId' => $categoriaId,
+                ':id' => $id
+            ]
+        );
+
+        if (!empty($existingProduct)) {
+            return false;
+        }
+
         $this->conn->update('produto', [
             'nome' => $nome,
             'descricao' => $descricao,
