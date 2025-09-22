@@ -36,22 +36,24 @@ $produtos = $query->select('produto');
                             <?php
                             if (is_array($produtos) && count($produtos) > 0) {
                                 foreach ($produtos as $produto) {
-                                    $isSelected = (isset($data['formData']['produto']) && $data['formData']['produto'] == $category['id']) ? 'selected' : '';
+                                    $isSelected = (isset($data['formData']['produto']) && $data['formData']['produto'] == $produto['nome']) ? 'selected' : '';
                                     echo "<option value=\"{$produto['nome']}\" {$isSelected}>" . htmlspecialchars($produto['nome']) . "</option>";
                                 }
                             }
                             ?>
-
-
                         </select>
                     </div>
                     <div class="mb-3 col-4">
-                        <label for="categoriaId" class="form-label">Status:</label>
-                        <select class="form-select" id="categoriaId" name="categoriaId">
+                        <label for="status" class="form-label">Status:</label>
+                        <select class="form-select" id="status" name="status">
                             <option selected disabled>Selecione...</option>
-                            <option value="pendente">Pendente</option>
-                            <option value="finalizada">Finalizada</option>
-                            <option value="cancelada">Cancelada</option>
+                            <?php
+                            $statusOptions = ['Pendente' => 'pendente', 'Finalizada' => 'finalizada', 'Cancelada' => 'cancelada'];
+                            foreach ($statusOptions as $label => $value) {
+                                $isSelected = (isset($data['formData']['status']) && $data['formData']['status'] == $value) ? 'selected' : '';
+                                echo "<option value=\"{$value}\" {$isSelected}>{$label}</option>";
+                            }
+                            ?>
                         </select>
                     </div>
                     <div class="mb-3 col-4">
