@@ -42,8 +42,8 @@ if (empty($_SESSION)) {
                             Vendas
                         </a>
                         <ul class="dropdown-menu">
-                            <li><a class="dropdown-item" href="vendas_realizadas.html">Vendas realizadas</a></li>
-                            <li><a class="dropdown-item" href="nova_venda.html">Nova venda</a></li>
+                            <li><a class="dropdown-item" href="/sell">Vendas realizadas</a></li>
+                            <li><a class="dropdown-item" href="/sell/new">Nova venda</a></li>
                         </ul>
                     </li>
                     <li class="nav-item dropdown">
