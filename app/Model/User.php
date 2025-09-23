@@ -24,4 +24,11 @@ class User
     {
         return password_verify($password, $hashedPassword);
     }
+
+    public function createUser(string $user, string $email, string $password)
+    {
+        $hashedPassword = password_hash($password, PASSWORD_DEFAULT);
+
+        return $this->conn->insert('usuario', ['nome' => $user, 'email' => $email, 'senha' => $hashedPassword]);
+    }
 }
