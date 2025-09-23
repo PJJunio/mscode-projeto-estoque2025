@@ -26,12 +26,6 @@ class ProductController extends AbstractController
 
         }
 
-        if (!empty($_GET['add'])) {
-            $model->incrementOne($_GET['add']);
-            header('Location: /');
-            exit;
-        }
-
         if (!empty($_GET['sell'])) {
             $model->decrementOne($_GET['sell']);
             header('Location: /');

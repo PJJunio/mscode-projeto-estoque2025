@@ -44,8 +44,6 @@ $produtos = $query->select('produto');
                                 <td><?= 'R$ ' . number_format($produto['valor'], 2, ',', '.') ?></td>
                                 <td><?= $produto['quantidade_disponivel'] ?></td>
                                 <td class="col-2 d-flex gap-1 w-auto flex-wrap">
-                                    <a href='product?add=<?= $produto['id'] ?>' class="btn btn-primary btn-sm"
-                                        title="Adicionar 1 (incrementar quantidade)"><i class="bi bi-plus"></i></a>
                                     <a href="product/edit/?id=<?= $produto['id'] ?>"
                                         class="btn btn-secondary btn-sm" title="Editar produto"><i class="bi bi-pencil"></i></a>
                                     <a href='product?delete=<?= $produto['id'] ?>' class="btn btn-danger btn-sm"
