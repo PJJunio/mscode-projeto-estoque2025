@@ -5,14 +5,16 @@ require_once __DIR__ . '/../../app/Database/Query.php';
 $query = new \App\Database\Query;
 
 $produtos = $query->select('produto');
+$usuario = $query->select('usuario', 'nome = :nome', [':nome' => $_SESSION['user']]);
 
 ?>
 
 <main>
     <div class="container py-5">
+        <h1>Bem vindo <?= $usuario[0]['nome'] ?>!</h1>
         <div class="container py-5">
             <div class="mb-4 d-flex flex-row justify-content-between">
-                <h1>Produtos</h1>
+                <h2>Produtos</h2>
                 <div>
                     <a href="product" class="btn btn-primary"><i class="bi bi-plus"></i>Novo produto</a>
                 </div>
@@ -44,8 +46,8 @@ $produtos = $query->select('produto');
                                 <td><?= 'R$ ' . number_format($produto['valor'], 2, ',', '.') ?></td>
                                 <td><?= $produto['quantidade_disponivel'] ?></td>
                                 <td class="col-2 d-flex gap-1 w-auto flex-wrap">
-                                    <a href="product/edit/?id=<?= $produto['id'] ?>"
-                                        class="btn btn-secondary btn-sm" title="Editar produto"><i class="bi bi-pencil"></i></a>
+                                    <a href="product/edit/?id=<?= $produto['id'] ?>" class="btn btn-secondary btn-sm"
+                                        title="Editar produto"><i class="bi bi-pencil"></i></a>
                                     <a href='product?delete=<?= $produto['id'] ?>' class="btn btn-danger btn-sm"
                                         title="Excluir"><i class="bi bi-trash"></i></a>
                                     <a href='product?sell=<?= $produto['id'] ?>' class="btn btn-primary btn-sm"
