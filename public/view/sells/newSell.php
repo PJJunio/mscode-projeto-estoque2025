@@ -4,7 +4,9 @@ require_once __DIR__ . '/../../../app/Database/Query.php';
 
 $query = new \App\Database\Query;
 
-$produtos = $query->select('produto');
+$quantity = 0;
+
+$produtos = $query->select('produto', 'quantidade_disponivel > :quantity', [':quantity' => $quantity]);
 
 ?>
 
