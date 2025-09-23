@@ -5,12 +5,13 @@ require_once __DIR__ . '/../../../app/Database/Query.php';
 $query = new \App\Database\Query;
 
 $produtos = $query->select('produto');
+
 ?>
 
 <main>
     <div class="container py-5">
         <div class="mb-4">
-            <h1>Novo produto</h1>
+            <h1>Nova venda</h1>
         </div>
 
         <div class="w-50 mt-2">
@@ -19,15 +20,11 @@ $produtos = $query->select('produto');
                     echo $data['error'];
                 } ?>
                 <div class="mb-3">
-                    <label for="nome" class="form-label">Nome:</label>
-                    <input type="text" class="form-control" id="nome" name="nome"
-                        value="<?php echo htmlspecialchars($data['formData']['nome'] ?? ''); ?>">
-                </div>
-                <div class="mb-3">
                     <label for="cpf_cliente" class="form-label">CPF do Cliente:</label>
                     <input type="text" class="form-control" id="cpf_cliente" name="cpf_cliente"
                         value="<?php echo htmlspecialchars($data['formData']['cpf_cliente'] ?? ''); ?>">
                 </div>
+
                 <div class="row">
                     <div class="mb-3 col-4">
                         <label for="produto" class="form-label">Produto:</label>
@@ -42,6 +39,7 @@ $produtos = $query->select('produto');
                             }
                             ?>
                         </select>
+
                     </div>
                     <div class="mb-3 col-4">
                         <label for="status" class="form-label">Status:</label>

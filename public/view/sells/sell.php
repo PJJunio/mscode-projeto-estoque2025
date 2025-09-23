@@ -13,6 +13,9 @@ $itens = $query->select('venda_item');
         <div class="container py-5">
             <div class="mb-4 d-flex flex-row justify-content-between">
                 <h1>Produtos</h1>
+                <?php if (!empty($data['error'])) {
+                    echo $data['error'];
+                } ?>
                 <div>
                     <a href="sell/new" class="btn btn-primary"><i class="bi bi-plus"></i>Nova venda</a>
                 </div>
