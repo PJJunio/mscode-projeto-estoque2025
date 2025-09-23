@@ -23,7 +23,7 @@ class Sell
 
         $this->query->insert('venda_item', ['venda_id' => $sell, 'produto_id' => $produto[0]['id'], 'quantidade' => $quantidade, 'preco_unitario' => $preco[0]['valor']]);
 
-        $this->query->update('produto', ['quantidade_disponivel' => $produto[1]['quantidade_disponivel'] - $quantidade], 'id = :id', [':id' => $produto]);
+        $this->query->updateDecrement('produto', 'quantidade_disponivel', $quantidade, 'id = :id', [':id' => $produto[0]['id']]);
 
         return true;
     }
