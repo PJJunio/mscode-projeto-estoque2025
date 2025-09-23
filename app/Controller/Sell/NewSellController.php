@@ -21,6 +21,9 @@ class NewSellController extends AbstractController
 
             } elseif($formData['status'] != 'finalizada' && $formData['status'] != 'pendente' && $formData['status'] != 'cancelada') {
                 $error = '<div class="alert alert-danger" role="alert">Erro ao escolher status!</div>';
+
+            } elseif($formData['quantidade'] <= 0) {
+                $error = '<div class="alert alert-danger" role="alert">O valor precisa ser superior a 0!</div>';
                 
             } elseif($model->checkQuantity($formData['produto'], $formData['quantidade'])) {
                 $model->newSell($formData['cpf_cliente'], $formData['produto'], $formData['status'], $formData['quantidade']);
