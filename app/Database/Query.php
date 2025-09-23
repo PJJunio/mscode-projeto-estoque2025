@@ -134,6 +134,26 @@ class Query
         }
     }
 
+    public function updateDecrement(string $tabela, string $coluna, string $quantity, string $condicao, array $parametros = []): bool
+    {
+        try {
+            $sql = "UPDATE {$tabela} SET {$coluna} = {$coluna} - $quantity";
+
+            if($condicao !== null) {
+                $sql .= " WHERE {$condicao}";
+            }
+
+            $stmt = $this->pdo->prepare($sql);
+            $stmt->execute($parametros);
+
+            return true;
+        } catch (\PDOException $e) {
+            echo "Erro na atualização: {$e->getMessage()}";
+
+            return false;
+        }
+    }
+
     public function delete(string $tabela, string $condicao, array $parametros = []): bool
     {
         try {
