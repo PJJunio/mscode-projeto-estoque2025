@@ -32,9 +32,9 @@
       <div class="form-floating mb-2">
         <input type="password" name="password" class="form-control" id="senha" placeholder="Password">
         <label for="senha">Senha</label>
+      <button class="btn btn-primary w-100 py-2 mt-2" type="submit">Acessar</button>
       </div>
-
-      <button class="btn btn-primary w-100 py-2" type="submit">Acessar</button>
+      <p class="mt-2">Não tem uma conta?<a href="register" style="text-decoration: none"> Criar uma conta!</a></p>
       <p class="mt-5 mb-3 text-body-secondary text-center">&copy; MS Code 2025</p>
     </form>
   </main>
