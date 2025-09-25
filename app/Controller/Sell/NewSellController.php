@@ -29,8 +29,7 @@ class NewSellController extends AbstractController
             } elseif($formData['quantidade'] <= 0) {
                 $error = '<div class="alert alert-danger" role="alert">O valor precisa ser superior a 0!</div>';
                 
-            } elseif($model->checkQuantity($formData['produto'], $formData['quantidade'])) {
-                $model->newSell($formData['cpf_cliente'], $formData['produto'], $formData['status'], $formData['quantidade']);
+            } elseif($model->editSell($_GET['id'], $formData['cpf_cliente'], $formData['produto'], $formData['status'], $formData['quantidade'])) {
                 $formData = [];
                 // $error = '<div class="alert alert-success" role="alert">Venda realizada com sucesso!</div>'; //TEM QUE DAR UM JEITO DESSE ERRO APARECER NA LISTA DE SELL;
                 header('Location: /sell');
