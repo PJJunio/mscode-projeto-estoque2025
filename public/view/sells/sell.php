@@ -30,6 +30,7 @@ $vendas = $query->select('venda');
                         <th scope="col">Qtd.</th>
                         <th scope="col">Valor</th>
                         <th scope="col">Status</th>
+                        <th scope="col">Ação</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -51,6 +52,12 @@ $vendas = $query->select('venda');
                                         <td><?= $item['quantidade'] ?></td>
                                         <td><?= 'R$ ' . number_format($valor, 2, ',', '.') ?></td>
                                         <td><?= $venda['status'] ?></td>
+                                        <td class="col-2 d-flex gap-1 w-auto flex-wrap">
+                                            <a href='sell' class="btn btn-primary btn-sm" title="Editar">Editar</a>
+                                            <a href='sell' class="btn btn-primary btn-sm" title="Finalizar"><i
+                                                    class="bi bi-check"></i></a>
+                                            <a href='sell' class="btn btn-danger btn-sm" title="Cancelar"><i class="bi bi-ban"></i></a>
+                                        </td>
                                     </tr>
                                     <?php
                                 }
