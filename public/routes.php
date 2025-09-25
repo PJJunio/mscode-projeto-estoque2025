@@ -10,6 +10,7 @@ use App\Controller\EditProductController;
 use App\Controller\Error\ErrorController;
 use App\Controller\Error\NotFoundController;
 use App\Controller\ProductController;
+use App\Controller\Sell\EditSellController;
 use App\Controller\Sell\NewSellController;
 use App\Controller\Sell\SellController;
 
@@ -27,6 +28,7 @@ $router = [
         '/category/new' => NewCategoryController::class,
         '/sell' => SellController::class,
         '/sell/new' => NewSellController::class,
+        '/sell/edit' => EditSellController::class
     ],
     'default' => NotFoundController::class
 ];
