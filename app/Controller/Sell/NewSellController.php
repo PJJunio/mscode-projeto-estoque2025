@@ -15,9 +15,13 @@ class NewSellController extends AbstractController
 
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $formData = $_POST;
+            $cpf = preg_replace('/[^0-9]/','', $_POST['cpf_cliente']);
 
             if (empty($formData['cpf_cliente']) || empty($formData['produto']) || empty($formData['status']) || empty($formData['quantidade'])) {
                 $error = '<div class="alert alert-danger" role="alert">Preencha todos os campos!</div>';
+
+            } elseif(strlen($cpf) != 11) {
+                $error = '<div class="alert alert-danger" role="alert">Insira um CPF valido!</div>';
 
             } elseif($formData['status'] != 'finalizada' && $formData['status'] != 'pendente' && $formData['status'] != 'cancelada') {
                 $error = '<div class="alert alert-danger" role="alert">Erro ao escolher status!</div>';
@@ -30,7 +34,7 @@ class NewSellController extends AbstractController
                 $formData = [];
                 // $error = '<div class="alert alert-success" role="alert">Venda realizada com sucesso!</div>'; //TEM QUE DAR UM JEITO DESSE ERRO APARECER NA LISTA DE SELL;
                 header('Location: /sell');
-                
+
             } else {
                 $error = '<div class="alert alert-danger" role="alert">Quantidade indisponivel!</div>';
 
