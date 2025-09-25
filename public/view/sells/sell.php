@@ -53,7 +53,7 @@ $vendas = $query->select('venda');
                                         <td><?= 'R$ ' . number_format($valor, 2, ',', '.') ?></td>
                                         <td><?= $venda['status'] ?></td>
                                         <td class="col-2 d-flex gap-1 w-auto flex-wrap">
-                                            <a href='sell' class="btn btn-primary btn-sm" title="Editar">Editar</a>
+                                            <a href='sell/edit?id=<?= $venda['id'] ?>' class="btn btn-primary btn-sm" title="Editar">Editar</a>
                                             <a href='sell' class="btn btn-primary btn-sm" title="Finalizar"><i
                                                     class="bi bi-check"></i></a>
                                             <a href='sell' class="btn btn-danger btn-sm" title="Cancelar"><i class="bi bi-ban"></i></a>
