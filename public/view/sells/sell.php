@@ -5,14 +5,13 @@ require_once __DIR__ . '/../../../app/Database/Query.php';
 $query = new \App\Database\Query;
 
 $vendas = $query->select('venda');
-$itens = $query->select('venda_item');
 ?>
 
 <main>
     <div class="container py-5">
         <div class="container py-5">
             <div class="mb-4 d-flex flex-row justify-content-between">
-                <h1>Produtos</h1>
+                <h1>Vendas</h1>
                 <?php if (!empty($data['error'])) {
                     echo $data['error'];
                 } ?>
@@ -37,6 +36,8 @@ $itens = $query->select('venda_item');
                     <?php
                     if (is_array($vendas) && count($vendas) > 0) {
                         foreach ($vendas as $venda) {
+                            $itens = $query->select('venda_item', 'venda_id = :venda_id', [':venda_id' => $venda['id']]);
+
                             if (is_array($itens) && count($itens) > 0) {
                                 foreach ($itens as $item) {
                                     $valor = $item['preco_unitario'] * $item['quantidade'];
